@@ -14,7 +14,8 @@ In order to set that it up just follow these steps here:
 5. Add the following line in your ~/.bashrc file (Note, update the path accordingly)
 
 ```
-   /path/to/the/file/2fa.sh
+   . /path/to/the/file/2fa.sh
 ```
+Note! The dot before the /path/ is very important as that way you will be running the script in the same shell! Without the dot the script would not work
 
 That is pretty much it, after that you will be prompted for a password after your actual SSH auth is completed.
