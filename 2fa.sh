@@ -7,7 +7,7 @@
 # Email:                                                             #
 # <bobby@bobbyiliev.com>                                             #
 # __revision='1.0'                                                   #
-# Simple scripts that adds a small 2FA authentication                #
+# Simple/Dummy script that adds a small 2FA authentication           #
 # What's different about the script is that you can use it on        #
 # systems that you do not have root or sudo access to                #
 ######################################################################
@@ -21,16 +21,22 @@ trap command SIGINT
 trap "" SIGTSTP
 read -s -p "$user@$host's password: " pass
 echo
-    	if [ "$pass" = "$mypass" ]; then
-                exit 0
+    	if [[ "$pass" = "$mypass" ]]; then
+                echo "Welcome back!"
         else
 	while [ -z $pass ] || [ "$pass" != "$mypass" ] ; do
+		((counter++))
                 read -s -p "$user@$host's password: " pass
                 echo
-                if [ "$pass" = "$mypass" ]; then
-                        exit 0
+                if [[ "$pass" = "$mypass" ]]; then
+                        echo "Welcome back!"
+			break
                 else
-                        #echo "Wrong password!"
+                    	#echo "Wrong password!"
+			if [[ $counter -gt 2 ]]; then 
+				echo "Wrong password!"
+				exit 0
+			fi
                         unset pass
                 fi
 
